@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>HeroRamp Local IT: Weekly BD Update</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;height:100%;background:#0A1826;overflow:hidden;}
+#stage{position:absolute;left:50%;top:50%;width:1920px;height:1080px;transform-origin:center center;}
+#stage>section{position:absolute;inset:0;box-sizing:border-box;width:1920px;height:1080px;display:none;overflow:hidden;}
+#stage>section.on{display:flex;}
+aside{display:none;}
+#nav{position:fixed;bottom:16px;right:20px;font:14px Inter,sans-serif;color:#aaa;user-select:none;}
+#nav button{background:#22252c;color:#eee;border:0;border-radius:6px;padding:6px 12px;margin-left:6px;cursor:pointer;font:inherit;}
+:root{--ink:#10263B;--paper:#F6F8FA;--line:#E2E8EE;--accent:#00A9A0;--amber:#E7A33E;--blue:#00A9A0;--muted:#5C6B7A;--tint:#E6F6F5;--amberTint:#FBF0DC;}
+section{padding:128px 128px 144px;background:var(--paper);color:var(--ink);font-family:'Inter',sans-serif;display:flex;flex-direction:column;gap:40px;position:relative;}
+section::before{content:"";position:absolute;left:128px;top:72px;width:72px;height:6px;border-radius:3px;background:var(--accent);}
+section.dark{background:var(--ink);color:#F6F8FA;}
+section.dark::before{background:var(--amber);}
+h1,h2,h3{font-family:'Space Grotesk',sans-serif;margin:0;letter-spacing:-0.5px;}
+h1{font-size:120px;line-height:1.0;font-weight:700;}
+h2{font-size:60px;line-height:1.1;font-weight:700;color:var(--ink);}
+.dark h2{color:#F6F8FA;}
+h3{font-size:32px;line-height:1.2;font-weight:600;}
+p{margin:0;font-size:28px;line-height:1.45;}
+b{font-weight:700;color:var(--accent);}
+.kicker{font-size:26px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--accent);}
+.sub{font-size:40px;line-height:1.3;color:var(--muted);}
+.dark .sub{color:#B9C6D2;}
+.meta{font-size:26px;color:#8FA3B5;}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
+.stat{background:#FFFFFF;border:1px solid var(--line);border-radius:18px;padding:36px 40px;display:flex;flex-direction:column;gap:10px;}
+.stat .num{font-family:'Space Grotesk',sans-serif;font-size:88px;font-weight:700;line-height:1;color:var(--ink);letter-spacing:-2px;}
+.stat .num.hot{color:var(--accent);}
+.stat .label{font-size:26px;line-height:1.35;color:var(--muted);}
+table{border-collapse:separate;border-spacing:0;width:100%;background:#FFFFFF;border:1px solid var(--line);border-radius:18px;overflow:hidden;}
+th{font-size:20px;letter-spacing:1.5px;text-transform:uppercase;text-align:left;padding:18px 24px;background:var(--tint);color:var(--ink);font-weight:700;border-bottom:1px solid var(--line);}
+td{font-size:25px;line-height:1.35;padding:18px 24px;border-bottom:1px solid var(--line);vertical-align:top;color:#2B3A48;}
+tr:last-child td{border-bottom:none;}
+td.co{font-weight:700;color:var(--ink);width:280px;}
+td.stage{width:340px;}
+.pill{font-weight:700;color:var(--accent);}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:28px;}
+.card{background:#FFFFFF;border:1px solid var(--line);border-left:8px solid var(--accent);border-radius:18px;padding:36px 40px;display:flex;flex-direction:column;gap:14px;}
+.card.alert{border-left-color:var(--amber);}
+.card p{font-size:26px;color:var(--muted);}
+.card .ask{color:var(--ink);font-weight:600;}
+.cols3{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
+.dark .card{background:#17324A;border-color:#24435E;border-left-color:var(--accent);}
+.dark .card.alert{border-left-color:var(--amber);}
+.dark .card h3{color:#F6F8FA;}
+.dark .card p{color:#B9C6D2;}
+.dark .card .ask{color:#FFFFFF;}
+ul{margin:0;padding-left:36px;}
+li{font-size:28px;line-height:1.45;margin-bottom:8px;}
+.footer{position:absolute;left:128px;bottom:56px;width:1664px;font-size:22px;color:var(--muted);}
+.tight .cards{gap:24px;}
+.tight .card{padding:28px 36px;gap:10px;}
+.tight .card p{font-size:24px;line-height:1.4;}
+.tight .card h3{font-size:30px;}
+.fin td,.fin th{text-align:right;}
+.fin td:first-child,.fin th:first-child{text-align:left;font-weight:600;color:var(--ink);}
+.fin tr.hl td{background:var(--tint);font-weight:700;color:var(--ink);}
+.fin tr.wt td{background:var(--amberTint);font-weight:700;color:var(--ink);}
+.fin tr.sep td{border-top:2px solid var(--ink);}
+.small td{font-size:23px;padding:14px 22px;}
+.small th{font-size:18px;padding:14px 22px;}
+.tbc{color:var(--amber);font-weight:700;}
+.cover-mark{position:absolute;right:-180px;top:-180px;width:720px;height:720px;border-radius:50%;border:90px solid var(--accent);opacity:0.18;}
+.cover-mark2{position:absolute;right:300px;bottom:-200px;width:400px;height:400px;border-radius:50%;border:40px solid var(--amber);opacity:0.5;}
+
+</style></head><body>
+<div id="stage"><section id="cover" class="dark" style="justify-content:space-between;">
+<div class="cover-mark"></div>
+<div class="cover-mark2"></div>
+<p class="kicker" style="margin-top:24px;">HeroRamp</p>
+<div style="display:flex;flex-direction:column;gap:32px;">
+<h1>Weekly BD update</h1>
+<p class="sub">18 November 2026</p>
+</div>
+<p class="meta">Iya Antonio, Business Development · Source: master tracker, updated 18 Nov</p>
+<aside>Update the week dates and every number each Monday from the master tracker.</aside>
+</section>
+<section id="pipeline">
+<h2>1. Done and evidenced: live deals</h2>
+<table class="small">
+<tr><th>Account</th><th>Stream</th><th>Evidence</th><th>Next step, date</th></tr>
+<tr><td class="co">Sagility</td><td>Non-Tech</td><td>54 blind profiles sent 16 Nov. ₱15K per hire agreed. Ops record: 266 sourced, 150 contacted, 23 HeroRamp accounts.</td><td>Call with Faith committed: first week of Dec</td></tr>
+<tr><td class="co">MTS</td><td>IT + Non-Tech</td><td>NDA done. 3 jobs uploaded. 14 Data Analyst candidates from AIOS, 8 Nov. Waiting on our trial account.</td><td>Trial account live, then 1-week trial, then commercials</td></tr>
+<tr><td class="co">Manila Water</td><td>IT</td><td>Draft contract and candidate profiles sent.</td><td>Signed contract: Fri 27 Nov</td></tr>
+<tr><td class="co">Inspiro</td><td>Non-Tech</td><td><b>Pilot offered</b> on 19 Nov call: 36 Makati night-shift CSR agents for the 8 Dec class. ₱15K/hire market rate. Already accredited (DDA).</td><td>Draft agreement Fri 20 Nov; trial access Mon 24 Nov</td></tr>
+<tr><td class="co">Alorica</td><td>Non-Tech</td><td>Discovery call 14 Oct. Walk-in-heavy funnel. No live role or onboarding since.</td><td>Dated TA meeting: Fri 27 Nov</td></tr>
+</table>
+<aside>Each row: what we can prove, and the one thing I'm closing next. Sagility and Alorica are Non-Tech; keep them out of the Local IT counts.</aside>
+</section>
+<section id="motion">
+<h2>1. Done and evidenced: meetings in motion</h2>
+<table class="small">
+<tr><th>Account</th><th>Origin</th><th>Evidence</th><th>Next step, date</th></tr>
+<tr><td class="co">Arcanys</td><td>Iya email outreach</td><td><b>Meeting agreed</b>: Thibaut Lallement (CFO, in charge of recruitment) replied within a day of my role-specific email.</td><td>Thu 26 or Fri 27 Nov</td></tr>
+<tr><td class="co">Pointwest</td><td>Iya own network</td><td><b>Meeting agreed</b> with Abby Pangan, Head of TA, for next week.</td><td>Tue 24 or Wed 25 Nov</td></tr>
+<tr><td class="co">Philtech / Albertsons</td><td>Ed intro</td><td>Paolo replied 17 Nov: will intro the tech hiring lead Thursday.</td><td>Intro Thu 19 Nov; chase Fri 20 Nov</td></tr>
+<tr><td class="co">Foundever</td><td>Ed intro</td><td>Intro 3 Nov; no reply. Private nudge to Eppie 18 Nov.</td><td>Chase Fri 20 Nov</td></tr>
+<tr><td class="co">UnionBank, Globe</td><td>Iya own network</td><td>Messages sent; waiting for intro to the TA head.</td><td>Meeting booked by Fri 27 Nov</td></tr>
+<tr><td class="co">InteLogix</td><td>Ed intro</td><td>Intro 26 Sep to Eden Gutierrez, Country Manager. She asked for details by email (28 Sep, travelling). Follow-up email and nudge 18 Nov.</td><td>Call Tue 24 or Thu 26 Nov</td></tr>
+</table>
+<aside>InteLogix went quiet after Eden asked for details by email; follow-up sent 18 Nov.</aside>
+</section>
+<section id="funnel">
+<h2>4. Connecting the dots: requirement to hire</h2>
+<table class="small">
+<tr><th>Stage</th><th>Sagility</th><th>MTS</th><th>Inspiro</th><th>Owner</th></tr>
+<tr><td class="co">Requirement + job in HeroRamp</td><td>Healthcare Associate uploaded; site and headcount to confirm</td><td>3 jobs uploaded; temporary account ongoing</td><td>CSR agents, Makati night shift, B2 English; 36 seats</td><td>Iya confirms; JD loads</td></tr>
+<tr><td class="co">Commercial terms</td><td>₱15K per hire agreed; call with Faith first week of Dec</td><td>NDA done; commercials after 1-week trial</td><td>Accredited; ₱15K/hire success fee; agreement due 20 Nov</td><td>Iya + Malou</td></tr>
+<tr><td class="co">Talent sourced</td><td>266 sourced, 150 contacted</td><td>14 Data Analysts from AIOS (8 Nov)</td><td>200+ customer support candidates ready</td><td>Ester / AIOS</td></tr>
+<tr><td class="co">In HeroRamp, matched</td><td>23 accounts; tagging to the requirement pending</td><td>2 uploaded historically; rest unconfirmed</td><td>Trial accounts for Rowena and Katrina by Mon 24 Nov</td><td>JD / Cairo</td></tr>
+<tr><td class="co">Presented</td><td>54 blind profiles, 16 Nov</td><td>Not yet: trial account still being deployed</td><td>First shortlist for the 8 Dec class</td><td>Iya</td></tr>
+<tr><td class="co">Interview, hire</td><td>Not yet</td><td>Not yet</td><td>Class starts 8 Dec</td><td>Client</td></tr>
+</table>
+<aside>Presentable now, with authorization: Sagility's 23 HeroRamp users once tagged, and MTS's 14 Data Analysts once the trial is live. Counts are from Ed's ops record; Ester to reconcile.</aside>
+</section>
+<section id="decisions" class="dark tight">
+<h2>2–3. Blocked, and what I need from you</h2>
+<div class="cards">
+<div class="card alert"><h3>MTS: trial account not ready</h3><p>The real blocker. The team hasn't finished the deployment and trial account, so MTS can't start testing. Commercials come after one week of trial.</p><p class="ask">A firm go-live date for the MTS trial account from the dev team.</p></div>
+<div class="card alert"><h3>Operations by the team, commercials by me</h3><p>Funnel counts, Sagility tagging, Shiela's pools and MTS loading need system access I don't have.</p><p class="ask">Team owns counts, tagging and uploads. I keep full ownership of everything commercial.</p></div>
+<div class="card alert"><h3>Inspiro pilot: terms and access</h3><p>36 CSR agents for the 8 Dec class. Their agency rate is ₱15K per hire; I offered ₱15K or lower with volume tiers, no subscription.</p><p class="ask">Approve ₱13K as the floor, and trial accounts for Rowena and Katrina by Mon 24 Nov.</p></div>
+<div class="card"><h3>Free trial and nudges</h3><p>30-day trial to restart quiet leads. Eppie (Foundever) silent two weeks.</p><p class="ask">Approve the trial terms, and nudge Eppie.</p></div>
+</div>
+<aside>Lead with MTS: nothing moves there until the trial account is live.</aside>
+</section>
+<section id="nextweek">
+<h2>5. What I'll close next</h2>
+<table class="small">
+<tr><th>Account</th><th>Close</th><th>By</th></tr>
+<tr><td class="co">Inspiro</td><td>Draft agreement and summary sent (20 Nov); trial accounts live; first CSR shortlist for the 8 Dec class</td><td>Fri 27 Nov</td></tr>
+<tr><td class="co">Sagility</td><td>Call with Faith on the 54 profiles and headcount</td><td>1st week Dec</td></tr>
+<tr><td class="co">Pointwest</td><td>Meeting with Abby held</td><td>Tue 24 / Wed 25 Nov</td></tr>
+<tr><td class="co">Arcanys</td><td>Meeting with Thibaut (CFO) held: 6 open tech roles, cost per hire</td><td>Thu 26 / Fri 27 Nov</td></tr>
+<tr><td class="co">MTS</td><td>Trial account live (dev team), then 1-week trial before commercials</td><td>Date from dev team</td></tr>
+<tr><td class="co">Manila Water</td><td>Contract signed</td><td>Fri 27 Nov</td></tr>
+<tr><td class="co">Alorica</td><td>Dated TA meeting on their walk-in funnel</td><td>Fri 27 Nov</td></tr>
+<tr><td class="co">Book of 10</td><td>10 active accounts with evidence and a dated next step in tab 01</td><td>Fri 27 Nov</td></tr>
+</table>
+<aside>Dates are my proposal; confirm with Ed.</aside>
+</section>
+<section id="ownnetwork">
+<h2>6. My own-network leads</h2>
+<table class="small">
+<tr><th>Company</th><th>Contact</th><th>Status</th><th>Next, date</th></tr>
+<tr><td class="co">Pointwest</td><td>Abby Pangan, Head of TA</td><td><b>Meeting booked</b></td><td>Tue 24 or Wed 25 Nov (date being confirmed)</td></tr>
+<tr><td class="co">UnionBank</td><td>TA head via my contact</td><td>Waiting for intro</td><td>Meeting by Fri 27 Nov</td></tr>
+<tr><td class="co">Globe</td><td>Jill Manalo, intro to TA lead</td><td>Waiting for intro</td><td>Meeting by Fri 27 Nov</td></tr>
+<tr><td class="co">Telstra</td><td>Diana Dionisio, TA Lead (ex-EY)</td><td>DM sent 18 Nov</td><td>Follow-up Tue 24 Nov</td></tr>
+<tr><td class="co">Optum</td><td>Raver Santos, TA Country Leader</td><td>DM sent 16 Nov</td><td>Follow-up Mon 23 Nov</td></tr>
+<tr><td class="co">Wipro</td><td>Aseem Roy, Country Head</td><td>Re-engaged</td><td>Follow-up Mon 23 Nov</td></tr>
+<tr><td class="co">ING Hubs</td><td>Louise Florentino, Tech Recruitment Lead</td><td>DM sent 16 Nov</td><td>Follow-up Mon 23 Nov</td></tr>
+<tr><td class="co">Tech Mahindra</td><td>Dwight Anderson Duario, Recruitment</td><td>DM sent</td><td>Follow-up Mon 23 Nov</td></tr>
+</table>
+<aside>Pointwest is agreed for next week. The rest count once they reply.</aside>
+</section>
+<section id="forecast">
+<h2>My revenue proposal: December to February</h2>
+<div class="stats">
+<div class="stat"><p class="num">₱3.04M</p><p class="label">Fees if every assumed deal closes: 179 hires</p></div>
+<div class="stat"><p class="num hot">₱1.08M</p><p class="label">Probability-weighted: what I'd commit to</p></div>
+<div class="stat"><p class="num">₱7.5M</p><p class="label">Ed's Sagility ceiling (500 × ₱15K), not yet in forecast</p></div>
+</div>
+<table>
+<tr><th>Month</th><th>Hires</th><th>Fees, base</th><th>Weighted</th><th>Main drivers</th></tr>
+<tr><td class="co">Dec 2026</td><td>64</td><td>₱990K</td><td>₱548K</td><td>Inspiro pilot 36, Sagility 25, Manila Water 3</td></tr>
+<tr><td class="co">Jan 2027</td><td>82</td><td>₱1.33M</td><td>₱340K</td><td>Inspiro agents 50, Sagility 25, Inspiro IT 5, Manila Water 2</td></tr>
+<tr><td class="co">Feb 2027</td><td>33</td><td>₱725K</td><td>₱195K</td><td>Sagility 20, MTS 5, Manila Water 3, Foundever 3, Inspiro 2</td></tr>
+</table>
+<p style="font-size:26px;color:var(--muted);">By stream: Non-Tech (Sagility, Inspiro agents) ₱2.34M base, ₱885K weighted. Local IT ₱700K base, ₱198K weighted. Manila Water pricing under review.</p>
+<aside>Full model in tab 09 of the master tracker. Sagility fee is assumed at ₱15K per start (committed-volume band), now 70 hires and the biggest assumption to confirm with Ed. After a 10% replacement provision: ₱1.58M net base, ₱625K net weighted.</aside>
+</section>
+<section id="financials" style="padding:128px 128px 160px;">
+<h2>Financial summary: Nov 2026 to Mar 2027</h2>
+<table class="fin">
+<tr><th>Base case (all assumed deals close)</th><th>Nov</th><th>Dec</th><th>Jan</th><th>Feb</th><th>Mar</th><th>Total</th></tr>
+<tr><td>Hires (starts)</td><td>0</td><td>64</td><td>82</td><td>33</td><td>0</td><td>179</td></tr>
+<tr><td>Gross fees invoiced</td><td>₱0</td><td>₱990K</td><td>₱1.33M</td><td>₱725K</td><td>₱0</td><td>₱3.04M</td></tr>
+<tr><td>Replacement provision (10%)</td><td>₱0</td><td>(₱99K)</td><td>(₱133K)</td><td>(₱73K)</td><td>₱0</td><td>(₱304K)</td></tr>
+<tr class="hl"><td>Net revenue</td><td>₱0</td><td>₱891K</td><td>₱1.19M</td><td>₱653K</td><td>₱0</td><td>₱2.74M</td></tr>
+<tr><td>Cash collected (30-day terms)</td><td>₱0</td><td>₱0</td><td>₱891K</td><td>₱1.19M</td><td>₱653K</td><td>₱2.74M</td></tr>
+<tr class="wt sep"><td>Weighted net revenue</td><td>₱0</td><td>₱493K</td><td>₱306K</td><td>₱176K</td><td>₱0</td><td>₱974K</td></tr>
+<tr><td>Weighted cash collected</td><td>₱0</td><td>₱0</td><td>₱493K</td><td>₱306K</td><td>₱176K</td><td>₱974K</td></tr>
+</table>
+<p class="footer">Source: tab 09 Revenue Forecast &amp; P&amp;L. IT-SPAC sourcing costs excluded; BD lead cost to be confirmed. Weighted = probability by current deal stage.</p>
+<aside>Net revenue is recognised when the hire starts; cash follows 30 days later, so January is the first cash month. The weighted line is the number to commit to; the base case is the upside if every assumed deal closes.</aside>
+</section>
+<section id="readiness">
+<h2>Meeting readiness: candidates and a test account before the call</h2>
+<p class="sub" style="font-size:32px;">MTS stalled at "trial pending" because nothing was ready when they said yes. From now on, prep starts when a meeting is booked, a lead replies warmly or a client agrees to a trial.</p>
+<div class="cols3">
+<div class="card"><h3>Iya: account brief</h3><p>Roles, job post links, priorities and buyer names, in a 20-minute template.</p><p class="ask">Within 1 working day of the trigger</p></div>
+<div class="card"><h3>TA team: profiles</h3><p>3 to 5 anonymised profiles per priority role, sourced from the account's own job posts. Less reliance on AIOS.</p><p class="ask">2 working days before the meeting</p></div>
+<div class="card alert"><h3>Dev team: test account</h3><p>The company's roles pre-loaded with sample candidates, logins ready, so they can try it the day they say yes.</p><p class="ask">1 working day before the meeting</p></div>
+</div>
+<aside>First briefs written for Inspiro (call tomorrow) and MTS. Full process in the Meeting Readiness Process doc.</aside>
+</section>
+<section id="trial">
+<h2>Proposal: a 30-day free trial to restart quiet leads</h2>
+<div style="display:grid;grid-template-columns:1.1fr 1fr;gap:48px;align-items:start;">
+<table>
+<tr><th>Term</th><th>Proposal</th></tr>
+<tr><td class="co">Length</td><td>30 days from login</td></tr>
+<tr><td class="co">Platform fee</td><td>₱0 during the trial</td></tr>
+<tr><td class="co">Scope</td><td>Up to 3 open roles, one location</td></tr>
+<tr><td class="co">They get</td><td>Test account + 3 to 5 anonymised profiles per role</td></tr>
+<tr><td class="co">If they hire</td><td>Standard success fee applies</td></tr>
+<tr><td class="co">Conversion</td><td>Day-25 review: agree terms or close</td></tr>
+</table>
+<div style="display:flex;flex-direction:column;gap:32px;">
+<div class="card"><h3>How I'll use it</h3><p>Offered in one line in follow-up 1 to anyone who didn't reply to the first message, starting with the 23 and 24 Nov follow-ups.</p></div>
+<div class="card alert"><h3>Need from you</h3><p class="ask">Approve the terms and success fee rates, and confirm how many trials TA and dev can run per week.</p></div>
+</div>
+</div>
+<aside>We only build once someone says yes: profiles in 2 working days, account in 3. Ester keeps a supply count for each account's top role so Iya knows what she can promise.</aside>
+</section>
+<section id="numbers" style="padding:128px 128px 160px;">
+<h2>Outreach this week</h2>
+<div class="stats">
+<div class="stat"><p class="num">36</p><p class="label">Companies contacted across LinkedIn, WhatsApp and email</p></div>
+<div class="stat"><p class="num">26</p><p class="label">LinkedIn connection requests sent, 6 accepted so far</p></div>
+<div class="stat"><p class="num">18</p><p class="label">Personalised LinkedIn DMs sent, each with a 3-touch sequence ready</p></div>
+<div class="stat"><p class="num">6</p><p class="label">Role-specific emails sent from Outlook; Arcanys replied within a day</p></div>
+<div class="stat"><p class="num hot">4</p><p class="label">Active deals: Manila Water, Sagility, MTS, Inspiro pilot</p></div>
+<div class="stat"><p class="num hot">3</p><p class="label">Meetings: Inspiro held 19 Nov (pilot offered), Pointwest 24/25 Nov, Arcanys 26/27 Nov</p></div>
+</div>
+<p class="footer">Counts as logged in the master tracker on 19 Nov. Replies started coming in after the 16 to 18 Nov ASEAN days off in Metro Manila.</p>
+<aside>Lead with activity, then point out the holiday explains the quiet inbox.</aside>
+</section>
+<section id="channels" class="tight">
+<h2>How we're reaching them</h2>
+<div class="cards">
+<div class="card"><h3>LinkedIn</h3><p>Connection requests to TA heads and country leaders, then a 3-touch DM sequence: message, follow-up after 4 working days, last follow-up a week later.</p></div>
+<div class="card"><h3>Warm intros</h3><p>WhatsApp groups from Ed (Philtech, Foundever), plus my own network (UnionBank, Globe). Private follow-ups when a group goes quiet.</p></div>
+<div class="card"><h3>Email (new)</h3><p>Role-specific emails to Morcon, Sumidenso, CyTech, AAISI and Arcanys. Next: an email touch for every LinkedIn contact who hasn't replied. Outlook connection waiting on IT.</p></div>
+<div class="card alert"><h3>Content that backs up outreach (proposed)</h3><p>Employers: 1 LinkedIn post a week from Iya on what PH companies are hiring for in tech, so contacts who check her profile see a hiring voice, not a cold pitch. Candidates: Tabby's talent community posts in tab 07 (Data/BI, software, IT support) build our own pool and cut reliance on AIOS.</p></div>
+</div>
+<aside>Content supports outbound; it is not a separate lead channel yet. No client results or logos until a client approves them in writing.</aside>
+</section>
+<section id="signals" class="tight">
+<h2>What the market told us</h2>
+<div class="cards">
+<div class="card alert"><h3>Insight-led messages to warm contacts book meetings</h3><p>Pointwest's Head of TA agreed to a meeting two days after a DM built on her own post about recruiter productivity, with no sourcing pitch. Same approach for the 23 Nov follow-ups.</p></div>
+<div class="card"><h3>In-house TA teams push back on sourcing</h3><p>RCM: "internal TA team, not looking to outsource." Lead with saving their recruiters' time and candidate readiness, not with sourcing.</p></div>
+<div class="card alert"><h3>Role-specific emails reach decision-makers fast</h3><p>Arcanys's CFO, who runs recruitment, asked for a meeting less than a day after an email naming their 6 open roles. Every email-first account now gets its own job posts.</p></div>
+<div class="card alert"><h3>For BPOs, the pain is agent volume, not tech</h3><p>Inspiro is ramping about 1,000 seasonal agents and handles IT roles in-house. They asked for an agent pilot within an hour. Lead BPO conversations with frontline ramps.</p></div>
+</div>
+<aside>Keep this slide to three or four learnings each week.</aside>
+</section>
+</div>
+<div id="nav"><span id="count"></span><button id="prev" aria-label="Previous slide">&#8592;</button><button id="next" aria-label="Next slide">&#8594;</button></div>
+<script>
+const s=[...document.querySelectorAll('#stage>section')];let i=0;
+const stage=document.getElementById('stage');
+function fit(){const k=Math.min(innerWidth/1920,innerHeight/1080);stage.style.transform=`translate(-50%,-50%) scale(${k})`;}
+function show(n){i=Math.max(0,Math.min(s.length-1,n));s.forEach((e,j)=>e.classList.toggle('on',j===i));document.getElementById('count').textContent=(i+1)+' / '+s.length;history.replaceState(null,'','#'+(i+1));}
+addEventListener('resize',fit);
+addEventListener('keydown',e=>{if(['ArrowRight','PageDown',' '].includes(e.key))show(i+1);if(['ArrowLeft','PageUp'].includes(e.key))show(i-1);});
+document.getElementById('next').onclick=()=>show(i+1);document.getElementById('prev').onclick=()=>show(i-1);
+fit();show((parseInt(location.hash.slice(1))||1)-1);
+</script></body></html>
